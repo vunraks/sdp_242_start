@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Карточка{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h3>{{ card.title }}</h3>
+    <p>{{ card.description }}</p>
+</div>
+{% endblock %}

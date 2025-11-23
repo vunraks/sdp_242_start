@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Доска объявлений{% endblock %}</title>
+    <link rel="stylesheet" href="{% static '/css/base.css' %}" />
+
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="container">
+        <ul class="menu">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/list/">Список</a></li>
+            <li><a href="/card/">Карточка</a></li>
+            <li><a href="/todos/">Данные API</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- ============== MAIN CONTENT ============== -->
+<main class="content container">
+    {% block content %}{% endblock %}
+</main>
+
+
+<!-- ================ FOOTER ================= -->
+<footer class="footer">
+    <div class="container">
+        <p>© 2025 BBoard — учебный проект</p>
+    </div>
+</footer>
+
+</body>
+</html>

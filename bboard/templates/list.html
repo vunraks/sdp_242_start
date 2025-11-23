@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Список{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Сортированный список</h2>
+
+    <ul class="category-list">
+        {% for item in items %}
+            <li class="category-item">
+                {{ item.title }}
+                <ul class="sub-list">
+                    {% for sub in item.children %}
+                        <li class="sub-item">{{ sub }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

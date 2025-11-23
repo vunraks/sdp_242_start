@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}API данные{% endblock %}
+
+{% block content %}
+<h2>Данные с Fake API</h2>
+
+<ul>
+    {% for t in todos %}
+        <li>
+            <strong>{{ t.title }}</strong>
+            — {% if t.completed %}✅ Выполнено{% else %}❌ Не выполнено{% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
