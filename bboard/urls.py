@@ -1,9 +1,8 @@
-
 from django.urls import path
-from bboard.views import index, by_rubric
+from . import views
 
 urlpatterns = [
-    path('<int:rubric_id>/', by_rubric, name='by_rubric'),
-    path('', index, name='index'),
-
+    path('', views.index, name='index'),
+    path('<int:rubric_id>/', views.by_rubric, name='by_rubric'),
+    path('login/', views.login_view, name='login'),
 ]
