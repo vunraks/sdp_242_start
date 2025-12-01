@@ -1,92 +1,61 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная :: Доска объявлений</title>
 
-{% block title %}Главная - Доска объявлений{% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Доска объявлений</h1>
 
-{% block content %}
-<!-- Заголовок и статистика -->
-<div class="row mb-4">
-    <div class="col">
-        <div class="hero-section bg-light p-5 rounded text-center">
-            <h1 class="display-4 text-primary">Добро пожаловать!</h1>
-            <p class="lead">Найдите всё что нужно на нашей доске объявлений</p>
-            <div class="row mt-4">
-                <div class="col-md-3">
-                    <div class="card bg-primary text-white">
-                        <div class="card-body">
-                            <h3>{{ bbs|length }}</h3>
-                            <p>Всего объявлений</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card bg-success text-white">
-                        <div class="card-body">
-                            <h3>{{ rubrics|length }}</h3>
-                            <p>Рубрик</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="mb-4">
+            <a href="{% url 'index' %}" class="btn btn-primary">Главная</a>
+            <a href="/login/" class="btn btn-outline-primary">Вход</a>
+
+            {% for rubric in rubrics %}
+            <a href="{% url 'by_rubric' rubric.pk %}" class="btn btn-outline-secondary">
+                {{ rubric.name }}
+            </a>
+            {% endfor %}
         </div>
-    </div>
-</div>
 
-<div class="row">
-    <!-- Боковая панель с рубриками -->
-    <div class="col-md-3">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white">
-                <h5 class="card-title mb-0">📂 Все рубрики</h5>
-            </div>
-            <div class="list-group list-group-flush">
-                <a href="{% url 'index' %}" class="list-group-item list-group-item-action active">
-                    Все объявления
-                </a>
-                {% for rubric in rubrics %}
-                <a href="{% url 'by_rubric' rubric.id %}" class="list-group-item list-group-item-action">
-                    {{ rubric.name }}
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
-    <!-- Основной контент -->
-    <div class="col-md-9">
-        <h2 class="mb-4">🔥 Все объявления</h2>
+        <h2 class="mb-3">Все объявления</h2>
 
         {% if bbs %}
-            <div class="row">
-                {% for bb in bbs %}
-                <div class="col-lg-6 mb-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title">{{ bb.title }}</h5>
-                                <span class="badge bg-primary">{{ bb.rubric.name }}</span>
-                            </div>
-                            <p class="card-text text-muted">{{ bb.content|truncatewords:15 }}</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="h4 text-success mb-0">{{ bb.price }} ₽</span>
-                                <button class="btn btn-outline-primary btn-sm">Подробнее</button>
-                            </div>
+            <div class="alert alert-info">
+                Всего объявлений: {{ bbs|length }}
+            </div>
+
+            {% for bb in bbs %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ bb.title }}</h5>
+                    <p class="card-text">{{ bb.content }}</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            {% if bb.price %}
+                            <span class="badge bg-success">Цена: {{ bb.price }} тг.</span>
+                            {% endif %}
+                            <span class="badge bg-primary">{{ bb.rubric.name }}</span>
                         </div>
-                        <div class="card-footer bg-transparent">
-                            <small class="text-muted">📅 {{ bb.published|date:"d.m.Y H:i" }}</small>
-                        </div>
+                        <small class="text-muted">
+                            {{ bb.published|date:"d.m.Y H:i:s" }}
+                        </small>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         {% else %}
-            <div class="text-center py-5">
-                <div class="text-muted">
-                    <h4>😔 Объявлений пока нет</h4>
-                    <p>Будьте первым, кто разместит объявление!</p>
-                    <button class="btn btn-primary mt-3">Добавить объявление</button>
-                </div>
+            <div class="alert alert-warning">
+                Пока нет объявлений
             </div>
         {% endif %}
     </div>
-</div>
-{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

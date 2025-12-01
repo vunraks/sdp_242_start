@@ -1,78 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}Вход - Доска объявлений{% endblock %}
-
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-        <div class="card shadow-lg">
-            <div class="card-body p-5">
-                <!-- Заголовок формы -->
-                <div class="text-center mb-4">
-                    <h2 class="card-title text-primary">🔐 Вход в систему</h2>
-                    <p class="text-muted">Введите ваши учетные данные</p>
-                </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Вход</h2>
 
-                <!-- Форма входа -->
-                <form id="loginForm">
-                    {% csrf_token %}
-                    
-                    <!-- Поле email -->
+                <form>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email адрес</label>
-                        <div class="input-group">
-                            <span class="input-group-text">📧</span>
-                            <input type="email" class="form-control" id="email" 
-                                   placeholder="ваш@email.com" required>
-                        </div>
-                        <div class="invalid-feedback">Пожалуйста, введите корректный email</div>
+                        <label>Логин:</label>
+                        <input type="text" class="form-control" placeholder="Введите логин">
                     </div>
 
-                    <!-- Поле пароля -->
                     <div class="mb-3">
-                        <label for="password" class="form-label">Пароль</label>
-                        <div class="input-group">
-                            <span class="input-group-text">🔒</span>
-                            <input type="password" class="form-control" id="password" 
-                                   placeholder="Ваш пароль" required>
-                        </div>
-                        <div class="invalid-feedback">Пожалуйста, введите пароль</div>
+                        <label>Пароль:</label>
+                        <input type="password" class="form-control" placeholder="Введите пароль">
                     </div>
 
-                    <!-- Дополнительные опции -->
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="remember">
-                        <label class="form-check-label" for="remember">Запомнить меня</label>
-                    </div>
-
-                    <!-- Кнопка отправки -->
-                    <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
-                        <strong>Войти</strong>
-                    </button>
-
-                    <!-- Ссылки -->
-                    <div class="text-center">
-                        <a href="#" class="text-decoration-none">Забыли пароль?</a>
-                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Войти</button>
                 </form>
-
-                <!-- Разделитель -->
-                <div class="text-center my-4">
-                    <span class="text-muted">или</span>
-                </div>
-
-                <!-- Дополнительные кнопки -->
-                <div class="d-grid gap-2">
-                    <button class="btn btn-outline-secondary">
-                        📱 Войти через Google
-                    </button>
-                </div>
             </div>
-        </div>
-
-        <!-- Демо уведомление -->
-        <div class="alert alert-info mt-4 text-center" role="alert">
-            <strong>Демо версия:</strong> Форма не отправляет данные на сервер
         </div>
     </div>
 </div>
